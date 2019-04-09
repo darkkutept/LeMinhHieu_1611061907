@@ -47,36 +47,34 @@
             </li>
         }
     </ul>
-    @section scripts {
-        <script>
-            $(document).ready(() => {
-                alert("jquery is works!");
-
-                $(".js-toggle-attendance").click((e) => {
-                    var button = $(e.target);
-                    $.post("/api/attendances", { courseId: button.attr("data-course-id") })
-                        .done(() => {
-                            button
-                                .removeClass("btn btn-default")
-                                .addClass("btn btn-info")
-                                .text("Going");
-                        })
-                        .fail(() => {
-                            alert("Something failed!");
-                        });
+   @section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $(".js-toggle-attendance").click(function (e) {
+                var button = $(e.target);
+                $.post("/api/attendances", { courseId: button.attr("data-course-id") })
+                .done(function () {
+                    button
+                        .removeClass("btn-default")
+                        .addClass("btn-info")
+                        .text("Going");
+                })
+                .fail(function () {
+                    alert("Something failed");
                 });
+            });
 
-                $(".js-toggle-follow").click((e) => {
-                    var button = $(e.target);
-                    $.post("/api/followings", { followeeId: button.attr("data-user-id") })
-                        .done(() => {
-                            button.text("Following");
-                        })
-                        .fail(() => {
-                            alert("Something failed!");
-                        });
+            $(".js-toggle-follow").click(function (e) {
+                var button = $(e.target);
+                $.post("/api/followings", { followeeId: button.attr("data-user-id") })
+                .done(function () {
+                    button.text("Following");
+                })
+                .fail(function () {
+                    alert("Something failed");
                 });
-            })
-        </script>
-    }
-</div>
+            });
+        });
+    </script>
+}

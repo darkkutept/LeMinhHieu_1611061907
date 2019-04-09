@@ -42,12 +42,21 @@
     </ul>
     @section scripts {
         <script>
-            $(document).ready(() => {
-                alert("jquery is works!");
-
-                CourseController.init();
+            $(document).ready(function() {
+                $(".js-toggle-attendace").click(function (e) {
+                    var button = $(e.target);
+                    $.post("/api/attendaces", { courseId: button.attr("data-course-id") })
+                    .done(function () {
+                        button
+                        .removeClass("btn-default")
+                        .addClass("btn-info")
+                        .text("Going");
+                    })
+                    .fail(function () {
+                        alert("Something failed!");
+                    });
+                });
    
-
                 $(".js-toggle-follow").click((e) => {
                     var button = $(e.target);
                     $.post("/api/followings", { followeeId: button.attr("data-user-id") })

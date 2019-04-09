@@ -19,7 +19,7 @@ namespace BigSchool.Controllers
             _dbContext = new ApplicationDbContext();
         }
 
-        [System.Web.Http.HttpPost]
+        [HttpPost]
         public IHttpActionResult Attend(AttendanceDto attendanceDto)
         {
             var userId = User.Identity.GetUserId();
